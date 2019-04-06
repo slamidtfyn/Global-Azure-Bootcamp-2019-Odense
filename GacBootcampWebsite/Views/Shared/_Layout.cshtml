@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - GacBootcampWebsite</title>
+    <title>@ViewData["Title"] - Global Azure bootcamp Odense</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -26,13 +26,19 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">GacBootcampWebsite</a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Azure bootcamp</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li><a asp-area="" asp-controller="KeyVault" asp-action="Index">Key Vault</a></li>
+                    <li><a asp-area="" asp-controller="BlobStorage" asp-action="Index">Blob storage</a></li>
+                    <li><a asp-area="" asp-controller="Cdn" asp-action="Index">CDN</a></li>
+                    <li><a asp-area="" asp-controller="AD" asp-action="Index">Azure AD</a></li>
+                    <li><a asp-area="" asp-controller="Functions" asp-action="Index">Functions</a></li>
+                    <li><a asp-area="" asp-controller="ServiceBus" asp-action="Index">Service bus</a></li>
+                    <li><a asp-area="" asp-controller="ApplicationInsights" asp-action="Index">Application Insights</a></li>
+                    <li><a asp-area="" asp-controller="Database" asp-action="Index">Database</a></li>
+                    <li><a asp-area="" asp-controller="Docker" asp-action="Index">Docker</a></li>
                 </ul>
             </div>
         </div>
@@ -44,7 +50,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2019 - GacBootcampWebsite</p>
+            <p>&copy; 2019 - Global Azure bootcamp Odense</p>
         </footer>
     </div>
 
