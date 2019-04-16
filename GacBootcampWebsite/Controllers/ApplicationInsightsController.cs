@@ -24,7 +24,7 @@ namespace GacBootcampWebsite.Controllers
             if (!string.IsNullOrEmpty(message))
                 ViewBag.Response = DefaultFormResponse.Create(success, message);
 
-            var model = new LogViewModel();
+            var model = new ApplicationInsightsViewModel();
             model.Table = await GetAiTable();
 
             return View(model);
