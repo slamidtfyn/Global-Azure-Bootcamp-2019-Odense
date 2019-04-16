@@ -1,7 +1,62 @@
-﻿@{
-    ViewData["Title"] = "Application Insights";
-}
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
+﻿@model LogViewModel
 
-<p>Use this area to provide additional information.</p>
+@{
+    var response = ViewBag.Response;
+}
+
+<h1>Application Insights</h1>
+
+<h2>Create Log Entry</h2>
+
+@if (response != null)
+{
+    if (response.Success)
+    {
+        <div class="alert alert-success" role="alert">
+            @response.Message
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger" role="alert">
+            @response.Message
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+    }
+}
+
+<form action="ApplicationInsights/AddToLog" method="post">
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-md-6">
+                <input class="form-control" type="text" id="logEntry" name="logEntry" placeholder="Insert log entry" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+    <input name="__RequestVerificationToken" type="hidden" value="CfDJ8Inyxgp63fRFqUePGvuI5jGZsloJu1L7X9le1gy7NCIlSduCRx9jDQClrV9pOTTmqUyXnJBXhmrjcUVDJyDUMm7-MF_9rK8aAZdRdlOri7FmKVkRe_2v5LIHGKFcTjPrWPYnc9AdSbomkiOSaTEg7RU" />
+</form>
+
+<h2>All log entries</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Entry</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var entry in Model.Entries)
+        {
+            <tr>
+                <td>@entry</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
