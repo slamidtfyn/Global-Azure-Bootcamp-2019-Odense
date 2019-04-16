@@ -2,6 +2,7 @@
 
 @{
     var response = ViewBag.Response;
+    var table = Model.Table;
 }
 
 <h1>Application Insights</h1>
@@ -46,14 +47,18 @@
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">Entry</th>
+            @foreach (var column in table.Columns)
+            {
+                <th>@column.Name.ToUpper()</th>
+            }
         </tr>
-    </thead>
+</thead>
     <tbody>
-        @foreach (var entry in Model.Entries)
+        @foreach (var row in table.Rows)
         {
             <tr>
-                <td>@entry</td>
+                <td>@row[0]</td>
+                <td>@row[1]</td>
             </tr>
         }
     </tbody>

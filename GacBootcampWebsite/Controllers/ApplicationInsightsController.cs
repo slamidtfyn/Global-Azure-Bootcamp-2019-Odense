@@ -1,75 +1,79 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using GacBootcampWebsite.Models;
+using GacBootcampWebsite.Models.ApplicationInsights;
+using Microsoft.ApplicationInsights;
 using Microsoft.AspNetCore.Mvc;
-using GacBootcampWebsite.Models;
-using System.IO;
-using System.Reflection;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 using System;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 
 namespace GacBootcampWebsite.Controllers
 {
     public class ApplicationInsightsController : Controller
     {
+        private readonly TelemetryClient _telemetryClient;
+
+        public ApplicationInsightsController()
+        {
+            _telemetryClient = new TelemetryClient();      
+        }
+
         public async Task<IActionResult> Index(bool success, string message)
         {
             if (!string.IsNullOrEmpty(message))
                 ViewBag.Response = DefaultFormResponse.Create(success, message);
 
             var model = new LogViewModel();
-            model.Entries = await GetLogEntries();
+            model.Table = await GetAiTable();
 
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddToLog(string logEntry)
+        public IActionResult AddToLog(string logEntry)
         {      
             if (string.IsNullOrEmpty(logEntry))
                 return RedirectToAction("Index", new { success = false, message = "Can not add empty input to log" });
 
-            await WriteToLog(logEntry);
+            WriteToLog(logEntry);
             return RedirectToAction("Index", new { success = true, message = $"{logEntry} added to log" });
         }
 
-        private async Task WriteToLog(string entry)
+        private void WriteToLog(string entry)
         {
             if (string.IsNullOrEmpty(entry))
                 throw new ArgumentNullException("No input given");
 
-            var pathToLog = GetLogFilePath();
-            await WriteToLog(pathToLog, entry);
+            _telemetryClient.TrackEvent(entry);
+            _telemetryClient.Flush();
         }
 
-        private async Task WriteToLog(string pathToLog, string entry)
+        private async Task<ApplicationInsightsTable> GetAiTable()
         {
-            if (!System.IO.File.Exists(pathToLog))
-                throw new FileNotFoundException($"Can not find the file on path {pathToLog}");
+            var apiKey = "ds4jpb87wqr3wva8i6ubooszg2cj3rmx8ghrlnqm";
+            var query = string.Format("customEvents | project name, timestamp | order by timestamp ");
 
-            await System.IO.File.AppendAllTextAsync(pathToLog, entry);
+            var url = string.Format($"https://api.applicationinsights.io/v1/apps/1c6fa4ce-4e67-470c-95ca-1d845ff6f62c/query?query={query}");
+            Console.WriteLine(url);
+
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            client.DefaultRequestHeaders.Add("x-api-key", apiKey);
+
+            HttpResponseMessage response = await client.GetAsync(url);
+
+            var table = GetFirstTableOfResponse(response);
+ 
+            return table;
         }
 
-        private async Task<List<string>> GetLogEntries()
+        public ApplicationInsightsTable GetFirstTableOfResponse(HttpResponseMessage response)
         {
-            var pathToLog = GetLogFilePath();
-            var logEntries = await GetLogEntries(pathToLog);
+            var result = response.Content.ReadAsStringAsync().Result;
+            ApplicationInsightsResult aiResult = JsonConvert.DeserializeObject<ApplicationInsightsResult>(result);
 
-            return logEntries.ToList();
-        }
-
-        private async Task<string[]> GetLogEntries(string pathToLog)
-        {
-            if (!System.IO.File.Exists(pathToLog))
-                throw new FileNotFoundException($"Can not find the file on path {pathToLog}");
-
-            var content = await System.IO.File.ReadAllLinesAsync(pathToLog);
-            return content;
-        }
-
-        private string GetLogFilePath()
-        {
-            string parent = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-            return Path.Combine(parent, "Logs", "log.txt");
+            return aiResult.GetFirstTable();
         }
     }
 }

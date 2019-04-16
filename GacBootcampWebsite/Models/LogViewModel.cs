@@ -1,14 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using GacBootcampWebsite.Models.ApplicationInsights;
 
 namespace GacBootcampWebsite.Models
 {
     public class LogViewModel
     {
-        public LogViewModel()
-        {
-            Entries = new List<string>();
-        }
-
-        public List<string> Entries { get; set; }
+      public ApplicationInsightsTable Table { get; set; }
     }
 }

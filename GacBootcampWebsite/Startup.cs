@@ -25,6 +25,11 @@ namespace GacBootcampWebsite
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            // Application Insights Setup
+            var aiConfiguration = app.ApplicationServices.GetService<Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration>();
+            aiConfiguration.DisableTelemetry = true;
+            aiConfiguration.TelemetryChannel.DeveloperMode = true;
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
