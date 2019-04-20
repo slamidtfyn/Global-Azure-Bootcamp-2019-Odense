@@ -16,4 +16,8 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\images\Servicebus\about-service-bus-queue.png" />
+  </ItemGroup>
+
 </Project>

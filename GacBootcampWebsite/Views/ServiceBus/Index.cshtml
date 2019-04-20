@@ -1,7 +1,91 @@
 ﻿@{
     ViewData["Title"] = "Azure Service bus";
 }
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
+@model SendEmailRequest
 
-<p>Use this area to provide additional information.</p>
+<img src="/images/Servicebus/logo.png" style="float: right; max-width: 200px; margin:10px 0 10px 10px;" />
+<h2>@ViewData["Title"]</h2>
+
+<h3>Why</h3>
+<p>
+    More often that not, we are dealing with things that take time, and from time we believe that the only right approach is to synchronously call another web server.
+    <br />
+    Though little did we know, our friendly college just updated the web service, and now the web service will calling two other webservices upon receiving the same web request :(.
+    <br />
+    Lo and behold, now the customer will have to wait until we have done three consecutive web request, and what worse is that anyone of the web request can fail because we assume that
+    the network is stable!
+
+    <br />
+    <br />
+    For many reasons dealing with a service which has a tight coupling to other services is a pain work with, and not only that you will have to rely on a webservice being alive
+    and available always.
+
+</p>
+<h3>What</h3>
+<h4>Introducing Service bus</h4>
+<p>
+    A service bus is a pretty simple concept. The idea is, that a service can put a message onto the bus (a publisher) and then when a consumer is ready to process,
+    the consumer will be taking the message off the the bus, and and start processing the message.
+</p>
+<img src="~/images/Servicebus/about-service-bus-queue.png" style="float: none; max-width: 500px; margin:10px 0 10px 10px;" />
+
+<h4>The problem we are facing</h4>
+<p>
+    The problem that we are in, is that we have a very old and rusty email server. The email service  under such load, that if we were to put more work onto it, it would crash.
+    More so, the crappy old mail service would respond extremely slow if we were send an email synchronously and it would have a high chance of receiving and error.
+
+    To solve this problem we will be offloading some heavy work onto a Azure Function, by putting a message on the service bus, and let the function deal with the the problem,
+    send the mail.
+</p>
+
+<h3>How</h3>
+
+<h4> 1 Create azure functions project in visual studio</h4>
+<p></p>
+<h4> 2 Create azure functions Resource on the azure portal</h4>
+<p></p>
+<h4> 3 Create Service Bus on the azure portal</h4>
+<p></p>
+<h5> 3.1 Configure queue name on the service bus</h5>
+<p></p>
+<h4>4 Putting a message on the queue</h4>
+<p></p>
+<h4>5 Processing the message in an azure functions</h4>
+
+
+
+<h2> Solution area </h2>
+<p>
+    Fill in your stuff and click the button!
+    What you might notice is that its currently extremely slow, and it has a tendency to throw error :(.
+    <br />
+    This is where you come in, help 
+</p>
+
+<form asp-controller="ServiceBus" asp-action="SendEmail" method="post">
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-md-6">
+                <input class="form-control" asp-for="Email" type="email" placeholder="Enter an email" data-val="true" data-val-required="The Email field is required." />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-6">
+                <input class="form-control" asp-for="Subject" type="text" placeholder="Enter an subject" data-val="true" data-val-required="The Email field is required." />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-6">
+                <textarea class="form-control" asp-for="Message" placeholder="Enter your message" data-val="true" data-val-required="The Email field is required."></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <button type="submit" class="btn btn-default" >Send email</button>
+            </div>
+        </div>
+    </div>
+</form>
