@@ -2,17 +2,22 @@
     ViewData["Title"] = "Azure Key Vault";
 }
 <img src="/images/KeyVault/azure-key-vault.png" style="float: right; max-width: 200px; margin:10px 0 10px 10px;" />
-<h2>@ViewData["Title"]</h2>
+<h2>@ViewData["Title"] - Secure your secrets</h2>
 
-<h3>Secure your secrets</h3>
-<h4>WHY</h4>
+<h3>Why</h3>
 <p>When using a web site, you will normally have references to external dependencies. These dependencies could be things like databases, external systems or other.</p>
 <p>The way these things is usually connected to each other is via connection strings or secret tokens. A common way of handling those secrets is by adding them to web.config or even hard coding them in the code.</p>
 <p>Even though both are valid ways of handling it, none of them are secure. Should a stranger gain access to your source code, the will be able to get those secrets and misuse them.</p>
 <p>Further, using the same connectionstring or secret across multiple applications, will make it hard to update those secrets, as you'd have to update them in each application that utilizes it.
-<h4>WHAT</h4>
+<h3>What</h3>
 <p>Azure Key Vault is a service that gives you a repository in the Cloud, to store secrets in a secure way. You can see it as a key-value store, where access to the store is managed by Azure</p>
 <p>Having a centralized store, enables all your applications to reuse the same secrets, further access to those secrets can now be limited to only a subset of people in an organization.</p>
 <p>The task in exercise is to swap out some hardcoded secrets with the same secrets, stored in a Azure Key Vault.</p>
-<h4>HOW</h4>
-<p>Use this area to provide additional information.</p>
+<h3>How - Assignment</h3>
+<p>The objective of this task is to remove this hardcoded super secret string "1FlVLPk0@Nd579*uYa89v!qs6!pNc", put it into Key Vault, and get it from there.</p>
+<p>The steps involved will be</p>
+<ul>
+    <li>Create a new Azure Key Vault</li>
+    <li>Create a Service Principal that can access the Key Vault(authorization to the vault) (the <a asp-controller="AD" asp-action="Index">Azure AD assignment</a> will show how to crate a Azure Active Directory to store the Service Principal in)</li>
+    <li>Implement code that can get the secret from Azure Key Vault</li>
+</ul>
