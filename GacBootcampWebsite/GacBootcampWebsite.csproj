@@ -20,4 +20,10 @@
     <None Include="wwwroot\images\Servicebus\about-service-bus-queue.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="wwwroot\images\Storage\scared-surprised-cat.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
