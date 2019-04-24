@@ -1,5 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Azure Key Vault";
+
 }
 <img src="/images/KeyVault/azure-key-vault.png" style="float: right; max-width: 200px; margin:10px 0 10px 10px;" />
 <h2>@ViewData["Title"] - Secure your secrets</h2>
@@ -14,7 +15,7 @@
 <p>Having a centralized store, enables all your applications to reuse the same secrets, further access to those secrets can now be limited to only a subset of people in an organization.</p>
 <p>The task in exercise is to swap out some hardcoded secrets with the same secrets, stored in a Azure Key Vault.</p>
 <h3>How - Assignment</h3>
-<p>The objective of this task is to remove this hardcoded super secret string "1FlVLPk0@Nd579*uYa89v!qs6!pNc", put it into Key Vault, and get it from there.</p>
+<p>The objective of this task is to remove this hardcoded super secret string "@ViewData["Secret"]", put it into Key Vault, and get it from there.</p>
 <p>The steps involved will be</p>
 <ul>
     <li>Create a new Azure Key Vault</li>

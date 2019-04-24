@@ -7,6 +7,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Configuration.AzureKeyVault;
 
 namespace GacBootcampWebsite
 {
@@ -18,7 +19,13 @@ namespace GacBootcampWebsite
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+            WebHost.CreateDefaultBuilder(args).ConfigureAppConfiguration((ctx, builder) =>
+            {
+                builder.AddAzureKeyVault(
+                    "https://globalazurebootcamp.vault.azure.net", 
+                    "d1ea2c4c-855c-4b5e-a88e-b2c5fc90828e", 
+                    "tKyd+xZDmIEqbqR8axikU/9Y3/xkLHUvh3CgLqFqNTg=", 
+                    new DefaultKeyVaultSecretManager());
+            }).UseStartup<Startup>();
     }
 }
