@@ -1,7 +1,14 @@
-﻿@{
+﻿@model UsersViewModel
+
+@{
     ViewData["Title"] = "Database";
 }
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
 
 <p>Use this area to provide additional information.</p>
+
+@foreach (var user in Model.Users)
+{
+    @Html.Raw(user.FirstName)
+}
