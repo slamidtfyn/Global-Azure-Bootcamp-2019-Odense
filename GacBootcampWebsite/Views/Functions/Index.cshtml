@@ -1,7 +1,8 @@
 ﻿@{
     ViewData["Title"] = "Azure Functions";
 }
-    <img src="~/images/AzureFunctions/azure-functions-logo1.png" style="float: right; max-width: 300px; margin:10px 0 10px 10px;" />
+@model SendEmailRequest
+<img src="~/images/AzureFunctions/azure-functions-logo1.png" style="float: right; max-width: 300px; margin:10px 0 10px 10px;" />
 <h2>@ViewData["Title"] - Serverless in the cloud</h2>
 <h3>Why</h3>
 <p>A website is mainly ment to be doing request/response operations, and those should be fast and relible. Some times when integration 3rd party tools in your applications, we end up using the webapp to do the communication with those tools, and waiting them.</p>
@@ -16,3 +17,31 @@
     <li>Create a HttpTrigger function that can send an email(or just log it), using the editor in the Azure Portal</li>
     <li>Create a contact form on the website, that triggers the function with the inserted data</li>
 </ul>
+<hr />
+<form asp-controller="Functions" asp-action="SendEmail" method="post">
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-md-6">
+                <input class="form-control" asp-for="Email" type="email" placeholder="Enter an email" data-val="true" data-val-required="The Email field is required." />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-6">
+                <input class="form-control" asp-for="Subject" type="text" placeholder="Enter an subject" data-val="true" data-val-required="The Email field is required." />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-6">
+                <textarea class="form-control" asp-for="Message" placeholder="Enter your message" data-val="true" data-val-required="The Email field is required."></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <button type="submit" class="btn btn-default">Send email</button>
+            </div>
+        </div>
+    </div>
+</form>
