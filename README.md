@@ -91,11 +91,11 @@ If there's no pr for a branch the documentation is in the menu point for your ex
 
 For example - you want to work on KeyVault.
 You select the pr named `Implement KeyVault for accessing the secret on the page` and follow the instructions on how to create a KeyVault.
-Then you can see what you need to implement for your site in the givin pr under `Files changed`
+Then you can see what you need to implement for your site in the given pr under `Files changed`
 
-## What exercises can i work on?
+## What exercises can I work on?
 
-You can extend your site with the following tecnhologies:
+You can extend your site with the following technologies:
 * Application Insights
 * Azure Functions
 * KeyVault
