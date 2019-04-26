@@ -108,5 +108,6 @@ You can extend your site with the following technologies:
 # HELP
 
 If you need any help just raise your hand or yell, and a super competent "instructor" will help you. :)
+It's also possible to get help on Slack. [Invite here](https://join.slack.com/t/cloudclubworkspace/shared_invite/enQtNjE5MjAxNDUxNDQ1LTdjNmZmY2Q2YWQ1YWY2ZDVhYTQyZjgwNzcxNWQzZjQzNTc0MTZmMzc1NzYyZGQwYzQ2YzI4ZTJmMDcyM2ExOWU)
 
 Enjoy
