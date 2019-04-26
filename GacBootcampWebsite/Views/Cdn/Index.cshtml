@@ -2,6 +2,64 @@
     ViewData["Title"] = "Azure Cdn";
 }
 <h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
 
-<p>Use this area to provide additional information.</p>
+<p>In this exercise we will create a CDN for your newly created Azure Web App.</p>
+
+<h4>
+    <ol>
+        <li>Login to shell.azure.com</li>
+        <li>Remember to be in Powershell mode</li>
+        <li>Let's define required variables / configuration settings in the shell.</li>
+    </ol>
+</h4>
+
+<p>Let's set some parameters for our CDN</p>
+
+<blockquote>$ResourceGroup = 'WebAppResourceGroup' <br />
+$Location = 'westeurope' <br />
+$name = 'cdnformyapp' <br />
+$origin = 'agbodensesuperapp.azurewebsites.net' <br />
+$profilename = 'uniqueprofile' <br />
+$Sku = 'Standard_Microsoft'</blockquote>
+
+<p>Create the profile for the CDN</p>
+<br />
+The profile is the container for all the endpoints we'll have in our environment.
+<br />
+
+<blockquote>
+az cdn profile create `<br />
+    --location $Location `<br />
+    --name $profilename `<br />
+    --resource-group $ResourceGroup `<br />
+    --sku $Sku
+</blockquote>
+
+<p>Let's create the CDN itself</p>
+
+<blockquote>
+az cdn endpoint create  `<br />
+    --name $name `<br />
+    --location $Location `<br />
+    --resource-group $ResourceGroup `<br />
+    --profile-name $profilename `<br />
+    --origin $origin
+</blockquote>
+
+<p>You're now able to browse your new CDN using $name.azureedge.net - the propagation normaly takes around 10 minutes for the Microsoft Standard SKU</p>
+
+<h3>Purge and test</h3>
+
+<p>The CDN site and the WebApp site should now show the same content. To test you can change your web app - deploy again and the content should now be different</p>
+<p>Now you can purge the CDN so it'll rebuild and the content should show the same once again.</p>
+
+<blockquote>
+az cdn endpoint purge  `<br />
+    --name $name `<br />
+    --resource-group $ResourceGroup `<br />
+    --profile-name $profilename `<br />
+    --content-paths '/*'
+</blockquote>
+
+<br />
+For more documentation visit <a href="https://docs.microsoft.com/en-us/cli/azure/cdn?view=azure-cli-latest">this page.</a>
