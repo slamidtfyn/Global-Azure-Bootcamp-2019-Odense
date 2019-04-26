@@ -17,7 +17,7 @@ namespace GacBootcampWebsite.Migrations
                     table.PrimaryKey("PK_Users", x => x.FirstName);
                 });
 
-            migrationBuilder.InsertData("Users", "FirstName", new string[] { "Robert is a god", "Mikulas", "Someone Else" });
+            migrationBuilder.InsertData("Users", "FirstName", new string[] { "Robert", "Mikulas", "Joachim" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
