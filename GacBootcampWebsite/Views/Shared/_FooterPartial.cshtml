@@ -1,0 +1,18 @@
+﻿@using System.Security.Claims
+@{
+    var username = "";
+    if (User.Identity.IsAuthenticated)
+    {
+        var identity = User.Identity as ClaimsIdentity; // Azure AD V2 endpoint specific
+        username = identity.Claims.FirstOrDefault(c => c.Type == "preferred_username")?.Value;
+    }
+}
+
+@if (string.IsNullOrEmpty(username) == false)
+{
+    <div style="position:fixed;height:50px;padding:5px;font-size:20px;left:0;bottom:0;text-align:center;width:100%;background-color:aqua">
+        <form asp-controller="AD" asp-action="Logout" method="post">
+            Logged in as: @username &nbsp;<a asp-area="AzureAD" asp-controller="Account" asp-action="SignOut">Sign out</a>
+        </form>
+    </div>
+}
