@@ -24,6 +24,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="wwwroot\images\Storage\scared-surprised-cat.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ServiceBus.Messages\ServiceBus.Messages.csproj" />
   </ItemGroup>
 

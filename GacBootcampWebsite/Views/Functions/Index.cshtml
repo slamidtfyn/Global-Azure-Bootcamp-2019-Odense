@@ -1,7 +1,18 @@
 ﻿@{
     ViewData["Title"] = "Azure Functions";
 }
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
-
-<p>Use this area to provide additional information.</p>
+    <img src="~/images/AzureFunctions/azure-functions-logo1.png" style="float: right; max-width: 300px; margin:10px 0 10px 10px;" />
+<h2>@ViewData["Title"] - Serverless in the cloud</h2>
+<h3>Why</h3>
+<p>A website is mainly ment to be doing request/response operations, and those should be fast and relible. Some times when integration 3rd party tools in your applications, we end up using the webapp to do the communication with those tools, and waiting them.</p>
+<p>Same goes for stuff like background processing tasks and scheduled tasks.</p>
+<p>A normal web application can be modified to do all of the above, but it is not recommended, as it raises the complexity, and takes away resources that can be utilized elsewhere.</p>
+<h3>What</h3>
+<p>Azure Functions can help us solve the above, by offloading tasks, that the website shouldn't be responsible for doing. Azure functions are serverless computing, which measn that we dont have to worry about how it is hosted and run, we just write the code, and leave the rest to Azure</p>
+<p>Azure Functions are great for stuff like sending emails, scheduled tasks, processing of files(like zipping or resizing images)</p>
+<h3>How - Assignment</h3>
+<ul>
+    <li>Create a Azure Functions app</li>
+    <li>Create a HttpTrigger function that can send an email(or just log it), using the editor in the Azure Portal</li>
+    <li>Create a contact form on the website, that triggers the function with the inserted data</li>
+</ul>

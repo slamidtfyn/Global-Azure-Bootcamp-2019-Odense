@@ -41,25 +41,44 @@
 <h3>How</h3>
 
 <h4> 1 Create azure functions project in visual studio</h4>
-<p></p>
+<p>In visuals studio right clock on the solution and click Create New Project and Select Azure Functions</p>
+
 <h4> 2 Create azure functions Resource on the azure portal</h4>
-<p></p>
+<p>
+    It is super easy to create resource groups, you can either go to the <a href="https://docs.microsoft.com/en-us/azure/azure-resource-manager/deploy-to-subscription">Azure portal</a> <br />
+    or you can follow the advanced guide for creating resource groups using CLI <a href="https://docs.microsoft.com/en-us/azure/azure-resource-manager/deploy-to-subscription">ClI guide</a>
+</p>
 <h4> 3 Create Service Bus on the azure portal</h4>
-<p></p>
+<p>Click "Add" inside resource group</p>
+
+<p>Search for "service bus", and install by following the wizard</p>
+
 <h5> 3.1 Configure queue name on the service bus</h5>
+
 <p></p>
 <h4>4 Putting a message on the queue</h4>
+<p>4.1 - Open the service bus resource</p>
+<p>4.2 - Click on "Queues" and click add queue and give it the name "email-input"</p>
+<p>4.3 - Click on "Shared access policies -> Select RootManageSharedAccesKey and then note the primary connection string"</p>
+
 <p></p>
 <h4>5 Processing the message in an azure functions</h4>
+<p>5.1 Right click on the functions project, select "Add" then "Add Azure Function. Follow the wizard and when it asks what kind of function, select "Service Bus Queue Trigger"</p>
+<p>5.2 For the connection string setting, give the connection string a name i.e "ServiceBusConnectionString". For the queue name "email-input"</p>
+<p>5.3 You will have to add the "ServiceBusConnectionString" key to the local.settings.json, and insert the connectionstring</p>
 
+<p>Hint: You might have to download the following nuget package to the Functions project "Microsoft.Azure.WebJobs.Extensions.ServiceBus"</p>
 
+<h4>Implementing ServiceBus in the GacBootWebsite</h4>
+<p>You can follow this guide <a href="https://github.com/Azure/azure-service-bus/tree/master/samples/DotNet/GettingStarted/Microsoft.Azure.ServiceBus/BasicSendReceiveUsingQueueClient">Get started sending and receiving messages from ServiceBus queues using QueueClient</a></p>
 
+<p>Note: The guide is covering both receiving and sending messages, however we only want to <i>Send</i> messages</p>
 <h2> Solution area </h2>
 <p>
     Fill in your stuff and click the button!
     What you might notice is that its currently extremely slow, and it has a tendency to throw error :(.
     <br />
-    This is where you come in, help 
+    This is where you come in, help us make this form super fast.
 </p>
 
 <form asp-controller="ServiceBus" asp-action="SendEmail" method="post">
@@ -84,7 +103,7 @@
 
         <div class="form-group">
             <div class="col-md-10">
-                <button type="submit" class="btn btn-default" >Send email</button>
+                <button type="submit" class="btn btn-default">Send email</button>
             </div>
         </div>
     </div>

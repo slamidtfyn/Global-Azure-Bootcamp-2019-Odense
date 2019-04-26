@@ -1,7 +1,15 @@
 ﻿@{
     ViewData["Title"] = "Azure Active Directory";
 }
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
-
-<p>Use this area to provide additional information.</p>
+<img src="~/images/AD/ActiveDirecotry2.png" style="float: right; max-width: 300px; margin:10px 0 10px 10px;" />
+<h2>@ViewData["Title"] - Manage identities</h2>
+<h3>Why</h3>
+<p>Resources in Azure should only be accessed by the users and identities that have access to them. Managing these identities should be done in a single place, and implementing your own user store should not a resonable solution.</p>
+<h3>What</h3>
+<p>To handle various identities within your application, we can use Azure Active Directory. It is just the normal Active directory, which has been moved to the cloud.</p>
+<p>Within Azure, the Azure AD is used to manage identities and access rights to all your resources. It can further more be used to create a login system for your site.</p>
+<h3>How - Assignment</h3>
+<ul>
+    <li>Create a Azure Active Directory</li>
+    <li>Enable authentication to the website, via a user that is managed via the Azure Active Directory</li>
+</ul>
