@@ -18,6 +18,9 @@ namespace GacBootcampWebsite
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.Configure<ServiceBusOptions>(Configuration.GetSection("ServiceBusOptions"));
+
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -43,5 +46,11 @@ namespace GacBootcampWebsite
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
+    }
+
+    public class ServiceBusOptions
+    {
+        public string ConnectionString { get; set; }
+
     }
 }

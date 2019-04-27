@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace GacBootcampWebsite.Models
+namespace Models
 {
     public class SendEmailRequest
     {
